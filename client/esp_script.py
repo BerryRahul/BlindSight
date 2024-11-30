@@ -3,9 +3,7 @@ import numpy as np
 import urllib.request
 import os
 
-# import ollama
-
-url = 'http://192.168.155.123/cam-hi.jpg'
+url = #route
 
 cap = cv2.VideoCapture(url)
 whT=320
@@ -13,16 +11,6 @@ confThreshold = 0.5
 nmsThreshold = 0.3
 classesfile='coco.names'
 classNames=[]
-# with open(classesfile,'rt') as f:
-#     classNames=f.read().rstrip('\n').split('\n')
-
-
-# modelConfig = 'yolov3.cfg'
-# modelWeights= 'yolov3.weights'
-# net = cv2.dnn.readNetFromDarknet(modelConfig,modelWeights)
-# net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
-# net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
-
 
 def findObject(outputs, im):
     hT, wT, cT = im.shape
@@ -48,7 +36,7 @@ def findObject(outputs, im):
     print(indices)
 
     if len(indices) > 0:
-        for i in indices.flatten():  # Use .flatten() to ensure a 1D list
+        for i in indices.flatten():  
             box = bbox[i]
             x, y, w, h = box[0], box[1], box[2], box[3]
             if classNames[classIds[i]] == 'bird':
@@ -70,7 +58,6 @@ while True:
     img_resp=urllib.request.urlopen(url)
     imgnp=np.array(bytearray(img_resp.read()),dtype=np.uint8)
     im = cv2.imdecode(imgnp,-1)
-    # sucess, img= cap.read()
     if im is not None and i%9==0:
         print(i)
         print('Saving image!')
@@ -78,31 +65,5 @@ while True:
         os.system(f'scp ./saved_imgs/{i}.png ubuntu@195.242.13.247:/home/ubuntu/meta_llama_hacks/inputs')
     i+=1
     print(i)    
-
-    # blob=cv2.dnn.blobFromImage(im,1/255,(whT,whT),[0,0,0],1,crop=False)
-    # net.setInput(blob)
-
-    # layernames=net.getLayerNames()
-    # print("Layer names:", layernames)
-
-
-    # outputNames = [layernames[i-1] for i in net.getUnconnectedOutLayers().flatten()]
-
-    # outputs = net.forward(outputNames)
-
-    # findObject(outputs,im)
-
-    # response = ollama.chat(
-    #     model='llama3.2-vision',
-    #     messages=[{
-    #         'role': 'user',
-    #         'content': 'describe the image',
-    #         'images': ['./inputs/test10.jpg']
-    #     }]
-    # )
-
-    # print(response.message.content)
-
-
     cv2.imshow('IMage',im)
     cv2.waitKey(1)
