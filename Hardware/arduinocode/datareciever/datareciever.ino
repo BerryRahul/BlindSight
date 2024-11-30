@@ -1,7 +1,7 @@
 #include <WiFi.h>
 
-const char* ssid = "RB";
-const char* password = "password";
+const char* ssid = "";
+const char* password = "";
 
 WiFiServer server(80); // Create a server on port 80
 
