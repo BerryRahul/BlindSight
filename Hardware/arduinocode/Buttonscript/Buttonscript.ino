@@ -2,8 +2,8 @@
 #include <HTTPClient.h>
 
 // Wi-Fi credentials
-const char* ssid = "RB";
-const char* password = "password";
+const char* ssid = "";
+const char* password = "";
 
 // Flask server URL
 const char* serverUrl = "http://192.168.155.144:5001/button";
