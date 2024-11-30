@@ -3,8 +3,8 @@
 #include "Audio.h"
 
 // Wi-Fi credentials
-const char* ssid = "RB";
-const char* password = "password";
+const char* ssid = "";
+const char* password = "";
 
 // Flask server endpoint
 const char* serverName = "http://192.168.155.144:5001/button";
